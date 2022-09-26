@@ -3,16 +3,22 @@ A C++ program that calculates "subflattening" values to find promising bipartiti
 
 ## Installation
 Download the code from src/ and utility/ and compile with a C++11- compliant compiler such as gcc, e.g.:
+```
 > g++ -std=c++11 src/*.cpp utility/*.cpp -O3 -o FlatBush
+```
 
 Alternatively to build FlatBush in "DEBUG" mode, 
+```
 > g++ -std=c++11 src/*.cpp utility/*.cpp -DDEBUGGING -o FlatBush
+```
 
 ## Running *FlatBush*
 FlatBush is run from the command-line with optional arguments, but one obviously needed argument is a set of aligned sequence data.
-Running FlatBush with no arguments yields
+Running FlatBush with no arguments
+```
 > ./FlatBush
-
+```
+yields
 ```
 usage: flatbush [OPTIONS]
 	-h or no arguments at all: print this information.
@@ -47,7 +53,9 @@ usage: flatbush [OPTIONS]
 ```
 
 A slightly more involved example is
+```
 > ./FlatBush -i ../filo10Taxon.100.fst -n sim10 -l; xdot sim10-graph.dot &
+```
 ... which 
 
 * invokes FlatBush 
