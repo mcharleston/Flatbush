@@ -21,35 +21,58 @@ Running FlatBush with no arguments
 yields
 ```
 usage: flatbush [OPTIONS]
-	-h or no arguments at all: print this information.
-	-i <filename>: input file name in Fasta or NEXUS format.
-		No default value --- without this, nothing much happens.
-	-l: do a landscape analysis.
-	-o <filename>: output file name for results.
-		Default value is "flatbush.out".
 	-f <int>: output format for errors and splits.
 		0:	binary representation of each split, comma-separated-values (CSV);
 		1:	binary representation of each split, tab-delimited;
 		2:	splits as sets, comma-separated (CSV).
-	[-n|-name] <string>: a project name, from which output files will be derived automatically.
-	-pert <int>: which perturbation types to be used for navigating the split space.
-		1: single taxon move only (move a single taxon from one side of the split to the other);
-		2: taxon swap only (swap taxa between the two sides of the split, maintaining the size of each part);
-		3: allow both perturbations as for (1) and (2) above.
-	-hsv <float> <float> <float>: input hue, saturation and value for the colouration of output graphs.
-		(NB: saturation is in fact ignored: still trying to find something that makes sense to vary.)
-	-s flag to turn on Silent mode for scripting:
-		Default value is FALSE.
-	-ss <int>: set the sample size of starting splits for landscape analysis.		Default value: 1000.
-	--do-all-splits: analyse all splits (not usable if the number of taxa is more than 16).
-	--sdrs: do a single steepest descent from a random starting split and then exit.
-		Default value: FALSE.
-	--seed <int>: set the random number seed.
-		Default value: set by system clock.
-	--show-all-details: output a potentially massive quantity of extra details that you probably don't want.
-		Default value: FALSE.
+		Default: 0 (binary, csv)
+	-h:	 stream this usage and quit
+	-i <filename>: input file name in Fasta or Nexus format.
+		No default value --- without this, nothing much happens.
+	-l: do a landscape analysis.
+	-m <method>: scoring method for splits (default is subflattening SVD score), where <method> is one of
+		svd: Singular Value Decomposition score of subflattening matrix;
+		parsimony|par: par - parsimony; summed minimum parsimony score of each site pattern on any tree containing the split
+		clust - cluster distance; sum of mean within-part Jukes-Cantor distance for each side of the split,
+			less the mean distance between taxon between sides of the split
+		fre - distance based on Euclidean distance between vectors of mean base frequencies on either side of the split
+		Default method: par.
+	-n <string>: project base name from which all file names will be derived
+	-o <filename>: output file name for results.
+		Default value is "flatbush.out".
+	-p[ert]: perturbation type(s) to use:
+		1 for single-taxon move only; 2 for swap only (retaining split sizes); 3 for both.
+		Default: 2
+	-ss <int>: set the sample size to <int> value
+		Default: 1000
 	-v flag to turn on Verbose mode:
-		Default value is FALSE.
+		Default: off
+	-rgbamax <float> <float> <float> <float>: red, green, blue, alpha values respectively for the *minimum* (WORST) score
+		Defaults: 0.0 0.0 0.5 0.25
+	-rgbamin <float> <float> <float> <float>: red, green, blue, alpha values respectively for the *maximum* (BEST) score
+		Defaults: 0.0 1.0 0.0 0.0
+	-rgbmax <float> <float> <float>: red, green, blue values respectively for the *maximum* (WORST) score
+		Defaults: 0.0 1.0 0.0 (with alpha = 0.0)
+	-rgbmin <float> <float> <float>: red, green, blue values respectively for the *minimum* (BEST) score
+		Defaults: 0.0 0.0 0.5 (with alpha = 0.25)
+	--buildtrees: build trees via divide-and-conquer (not yet implemented!)
+	--debug: if set and FlatBush compiled with -DDEBUGGING defined, turn on debugging messages for problem diagnosis
+		Default: off
+	--do-all-splits: systematically steepest descent from each split. If ntax>16 this will be over-ridden and splits will be sampled.
+		Default: off
+	--sdrs: do a single Steepest Descent Random Start (useful for debugging but not much else)
+	--seed <int>: set the random number seed, for repeatability
+		Default: seed set from the system clock
+	--show-all-details: show all the split errors:
+		this will potentially take a much longer time and fill up your terminal with junk you didn't really want.
+	--silent flag to turn on Silent mode, useful for bash scripting
+		Default: off
+		--splits-file <filename>: load a set of splits in as "true" splits
+		format: a list of splits as binary strings with a floating-point number for each, such as branch length.
+		e.g. "00111, 0.5" to define split {0,1} | {2,3,4} with value 0.5
+	--taxon-names: if possible, print splits with taxon names;
+		Default: off
+
 ```
 
 A slightly more involved example is
@@ -65,6 +88,14 @@ A slightly more involved example is
 * and then invoking the "xdot" Linux command to open the resulting graph for display.
 
 Note that FlatBush can also parse fairly basic NEXUS-style input files.
+
+Another example:
+```
+> ./FlatBush -i noclock-GTR-n20-b0.5-l1000-1-2.fst -m clust -n noclock-GTR-n20-b0.5-l1000-1-2.fst.clust --splitsfile noclock-GTR-n20-b0.5-l1000-1.bsplits -l
+```
+also loads a *splits* file, containing a set of splits of interest.
+[more to come here]
+
 
 ### NEXUS format input files
 
