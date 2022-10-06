@@ -1,5 +1,5 @@
 # FlatBush
-A C++ program that calculates "subflattening" values to find promising bipartitions of phylogenetic data.
+A C++ program that calculates "subflattening" values (*and others*) to find promising bipartitions of phylogenetic data.
 
 ## Installation
 Download the code from src/ and utility/ and compile with a C++11- compliant compiler such as gcc, e.g.:
