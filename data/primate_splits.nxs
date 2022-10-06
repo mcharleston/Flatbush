@@ -1,0 +1,8 @@
+#nexus
+begin flatbush;
+	splits
+		taxa { Gorilla Homo_sapiens Pan Pongo },
+		taxa { Hylobates Homo_sapiens M_fascicularis },
+		taxa { Saimiri_sciureus Tarsius_syrichta }
+	;
+end;
