@@ -140,8 +140,8 @@ Split,SplitSize,FinalScore,DoASize
 A dot- (graphviz) format file producing this image:
 ![n10-graph-clust-anon.png](https://github.com/mcharleston/Flatbush/blob/master/n10-graph-clust-anon.png)
 
-Alternatively with the defaults left as they are:
-![n10-graph-defaults.png](https://github.com/mcharleston/Flatbush/blob/master/n10-graph-labelled.png)
+Alternatively with the defaults left as they are (default colours & split format, using parsimony-based score, and no input set of known splits):
+![n10-graph-defaults.png](https://github.com/mcharleston/Flatbush/blob/80221dfe42fc63cd9b44beeb0f48fa83e27bce8a/n10-graph-clust-labelled.png)
 
 ### NEXUS format input files
 
