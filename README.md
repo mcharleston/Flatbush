@@ -141,7 +141,7 @@ A dot- (graphviz) format file producing this image:
 ![n10-graph-clust-anon.png](https://github.com/mcharleston/Flatbush/blob/master/n10-graph-clust-anon.png)
 
 Alternatively with the defaults left as they are:
-![n10-graph-defaults.png](https://github.com/mcharleston/Flatbush/blob/master/n10-graph-clust-anon.png)
+![n10-graph-defaults.png](https://github.com/mcharleston/Flatbush/blob/master/n10-graph-labelled.png)
 
 ### NEXUS format input files
 
